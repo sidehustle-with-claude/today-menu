@@ -1,0 +1,12 @@
+[
+  { "id": "c01", "input": "매운 거 말고 혼밥", "expected": { "avoid": ["매운"], "solo": true } },
+  { "id": "c02", "input": "비 오는 날 국물", "expected": {} },
+  { "id": "c03", "input": "아이랑 먹기 좋은 곳", "expected": {} },
+  { "id": "c04", "input": "가볍게 커피랑 빵", "expected": { "category": "카페" } },
+  { "id": "c05", "input": "야식", "expected": {} },
+  { "id": "c06", "input": "안 맵게 말고 매운 걸로", "expected": {} },
+  { "id": "c07", "input": "혼자 분식 먹고 싶어", "expected": { "category": "분식", "solo": true } },
+  { "id": "c08", "input": "중식인데 해산물은 빼고", "expected": { "category": "중식", "avoid": ["해산물"] } },
+  { "id": "c09", "input": "한식 말고 아무거나", "expected": {} },
+  { "id": "c10", "input": "혼밥하기 좋은 한식, 짠 건 싫어", "expected": { "category": "한식", "avoid": ["짠"], "solo": true } }
+]
