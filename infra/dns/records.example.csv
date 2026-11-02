@@ -1,0 +1,10 @@
+# name,type,expected
+# - name: 확인할 이름. example.com 은 예약 도메인이라 가짜 값입니다. 내 도메인으로 바꾸세요.
+# - type: A, CNAME, TXT 중 하나
+# - expected: 기대하는 값. 여러 개면 | 로 잇습니다. 값은 책의 값을 외워 넣지 말고 각 서비스 화면(Vercel Domains, GitHub Pages 설정)에서 복사하세요.
+# 아래 값은 모양을 보여 주는 예시입니다.
+example.com,A,76.76.21.21
+www.example.com,CNAME,d1d4fc829fe7bc7c.vercel-dns-017.com
+blog.example.com,CNAME,your-name.github.io
+# apex 도메인을 GitHub Pages 블로그에 쓸 때(위 example.com A 줄 대신) GitHub 공식 문서의 A 레코드 4개:
+# example.com,A,185.199.108.153|185.199.109.153|185.199.110.153|185.199.111.153
