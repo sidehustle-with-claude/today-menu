@@ -7,16 +7,22 @@ import type { Place } from '../types';
 
 type Props = {
   onSelect: (place: Place) => void;
+  onOpenSettings: () => void;
 };
 
 // testID는 e2e 테스트(.maestro/search.yaml)에 필요한 요소에만 단다.
-export default function HomeScreen({ onSelect }: Props) {
+export default function HomeScreen({ onSelect, onOpenSettings }: Props) {
   const [neighborhood, setNeighborhood] = useState('');
   const [results, setResults] = useState<Place[] | null>(null);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>오늘 뭐 먹지</Text>
+      <View style={styles.header}>
+        <Text style={styles.heading}>오늘 뭐 먹지</Text>
+        <Pressable onPress={onOpenSettings}>
+          <Text style={styles.settings}>설정</Text>
+        </Pressable>
+      </View>
       <TextInput
         testID="neighborhood-input"
         style={styles.input}
@@ -59,7 +65,9 @@ export default function HomeScreen({ onSelect }: Props) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20 },
-  heading: { fontSize: 24, fontWeight: '700', marginBottom: 16 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 },
+  heading: { fontSize: 24, fontWeight: '700' },
+  settings: { color: '#e8590c', fontSize: 16 },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',

@@ -206,3 +206,9 @@
 - 애드센스 게시자 ID 는 `NEXT_PUBLIC_ADSENSE_PUB` 환경변수에서만 읽고 코드에 쓰지 않는다. 광고 코드는 `app/ad-slot.tsx` 한 곳에서만 붙인다.
 - `/ads.txt` 는 내 줄 하나만 낸다(`src/adsense.ts`). ID 가 없으면 404 이다.
 - 내 사이트의 광고를 직접 누르지 않는다.
+
+## 스토어 제출 (39장)
+- 제출 전 `bash scripts/presubmit-check.sh`를 돌린다. `example.com` 자리표시 주소나 실제 광고 단위 ID가 코드에 남아 있으면 제출하지 않는다.
+- 실제 심사용 비밀번호·데모 계정은 이 저장소와 대화에 적지 않는다. 사람이 콘솔에 직접 입력한다.
+- 스토어 문구(`docs/store-listing-draft.md`)에는 앱에 실제로 있는 기능만 쓴다. 기능을 바꾸면 문구와 `docs/app-data-inventory.md`도 같이 고친다.
+- 심사 회신, 이의 제기, 제출 버튼은 사람이 누른다.

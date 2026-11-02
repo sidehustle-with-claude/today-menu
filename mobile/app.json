@@ -28,7 +28,8 @@
         "react-native-google-mobile-ads",
         {
           "androidAppId": "ca-app-pub-3940256099942544~3347511713",
-          "iosAppId": "ca-app-pub-3940256099942544~1458002511"
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511",
+          "userTrackingUsageDescription": "맞춤 광고를 보여 주기 위해 광고 식별자를 사용합니다. 허용하지 않아도 앱은 똑같이 쓸 수 있어요."
         }
       ]
     ]
