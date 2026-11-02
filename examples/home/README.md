@@ -4,3 +4,4 @@
 
 - `bin/revive-sessions.sh` → `~/bin/revive-sessions.sh` (41장: 재부팅 뒤 세션 되살리기, 기본은 DRY_RUN)
 - `Library/LaunchAgents/com.example.today-menu.revive.plist` → `~/Library/LaunchAgents/` (41장: 로그인 때 위 스크립트를 한 번 실행, `내이름`을 내 계정 이름으로 바꾼 뒤 설치)
+- `Library/LaunchAgents/com.example.today-menu.morning.plist` → `~/Library/LaunchAgents/` (54장: 매일 8시에 `morning-report.sh` 실행, `내이름`을 내 계정 이름으로 바꾼 뒤 설치)
