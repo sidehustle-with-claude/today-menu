@@ -9,7 +9,7 @@
 | Cloudflare Workers, D1 | `src/favorites-api.ts`, `workers/favorites` | 즐겨찾기 | 5. 처리 위탁 |
 | 공공데이터포털 | `src/tools-impl.ts` | 날씨 격자 좌표, 지역 코드 (사용자 개인정보 아님) | 해당 없음 (가게 정보 출처는 약관 3) |
 | Google Gemini API | `src/llm.ts` (비교 실습용) | 서비스 화면에서는 쓰지 않음 | 해당 없음 |
-| Google Analytics | 아직 없음 | | 34장에서 추가 |
+| Google Analytics | `app/google-analytics.tsx`, `src/analytics.ts` | 방문 페이지, 기기 정보, `favorite_add` 의 메뉴 종류 | 1. 수집하는 항목, 5. 처리 위탁(방문 통계와 거부 방법 포함) |
 | 결제 서비스 | 아직 없음 | | 37장에서 추가 |
 | 광고 | 아직 없음 | | 38장에서 추가 |
 

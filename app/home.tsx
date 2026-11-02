@@ -10,6 +10,7 @@ import { apiBase, pullFavorites, pushFavorite } from "../src/favorites-api";
 import { getSupabase } from "../src/supabase";
 import { addFavorite, loadFavoriteIds, removeFavorite, type FavoritesDb } from "../src/favorites-supabase";
 import AuthBox, { type AuthUser } from "./auth-box";
+import { track } from "../src/analytics";
 
 const CATEGORIES = ["한식", "분식", "카페", "중식"];
 const KEY = "favorites";
@@ -202,6 +203,7 @@ export default function Home() {
                 }
                 const next = toggleFavorite(r.id);
                 setFavorites(next);
+                if (next.includes(r.id)) track("favorite_add", { menu_category: r.category }); // 가게 이름·사용자 정보는 보내지 않는다
                 if (sb && user) {
                   const db = sb as unknown as FavoritesDb;
                   if (next.includes(r.id)) void addFavorite(db, user.id, r.id, r.name);
