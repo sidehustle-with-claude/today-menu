@@ -260,3 +260,9 @@
 - 실행 전에 명령을 먼저 보여 준다.
 - 끝나면 ffprobe 로 길이·해상도·코덱을 확인해서 알려 준다.
 - 스크립트는 scripts/ 의 cut.sh, extract-audio.sh, shrink.sh, burn-subtitles.sh, make-intro.sh, mix-bgm.sh 를 먼저 쓴다.
+
+## 하네스 규칙
+- 훅이 작업을 막으면 훅 스크립트, 설정 파일, 상태 파일(.fail-count 등)을 고치거나 지우지 않는다.
+- 막은 이유를 그대로 사람에게 보고하고 지시를 기다린다.
+- PLAN.md의 "승인: 예" 줄은 사람만 쓴다.
+- 한두 줄 고치기, 문서 수정, 질문에는 하네스를 걸지 않는다.

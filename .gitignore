@@ -90,3 +90,4 @@ output/*
 
 # 50장: claude --worktree 가 만드는 작업 폴더
 .claude/worktrees/
+.claude/hooks/.fail-count
