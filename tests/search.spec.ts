@@ -3,7 +3,7 @@
 import { test, expect } from "@playwright/test";
 
 test("동네 검색 후 상세 보기", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/menu");
   await page.getByLabel("동네 이름").fill("새솔동");
   await page.getByRole("button", { name: "추천 받기" }).click();
 
@@ -17,7 +17,7 @@ test("동네 검색 후 상세 보기", async ({ page }) => {
 });
 
 test("없는 동네는 안내 문구가 나온다", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/menu");
   await page.getByLabel("동네 이름").fill("없는동");
   await page.getByRole("button", { name: "추천 받기" }).click();
   await expect(page.getByText("조건에 맞는 곳을 찾지 못했어요")).toBeVisible();
@@ -25,7 +25,7 @@ test("없는 동네는 안내 문구가 나온다", async ({ page }) => {
 });
 
 test("즐겨찾기는 새로 고쳐도 남는다", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/menu");
   const star = page.getByRole("button", { name: "즐겨찾기" }).first();
   await expect(star).toHaveAttribute("aria-pressed", "false");
   await star.click();

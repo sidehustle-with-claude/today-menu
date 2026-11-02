@@ -2,7 +2,7 @@
 import { test, expect } from "@playwright/test";
 
 test("English 버튼을 누르면 화면 문구가 영어로 바뀐다", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/menu");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("오늘 뭐 먹지");
 
   await page.getByRole("button", { name: "English" }).click();

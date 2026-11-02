@@ -8,7 +8,6 @@ export function generateStaticParams() {
   return restaurants.map((r) => ({ id: r.id }));
 }
 
-// 가게마다 title 과 description 이 달라야 한다.
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const place = restaurants.find((r) => r.id === id);
@@ -31,7 +30,7 @@ export default async function PlacePage({ params }: { params: Promise<{ id: stri
         {place.area} · {place.category} · {place.hours}
       </p>
       <p className="hint">화면의 가게 정보는 가상 데이터입니다.</p>
-      <Link href="/">추천 목록으로 돌아가기</Link>
+      <Link href="/menu">추천 목록으로 돌아가기</Link>
     </main>
   );
 }

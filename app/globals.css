@@ -42,3 +42,24 @@ input { width: 100%; height: 48px; padding: 0 var(--s2); font: inherit; color: v
 .auth button { min-height: 40px; padding: 0 var(--s2); font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer; }
 .auth button:disabled { color: var(--muted); cursor: default; }
 .auth-actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s1); }
+main.wide { max-width: 720px; }
+a { color: var(--accent); }
+.lead { margin: 0 0 var(--s3); font-size: 18px; }
+.store-buttons { display: grid; gap: var(--s1); margin-bottom: var(--s4); }
+.store-buttons a { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 var(--s2); color: var(--text); text-decoration: none; border: 1px solid var(--line); border-radius: var(--radius); }
+.store-buttons a.primary { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+.landing section { margin-bottom: var(--s4); }
+.landing h2, .doc h2 { font-size: 18px; margin: var(--s3) 0 var(--s1); }
+.landing p, .doc p, .doc li { line-height: 1.6; }
+.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s1); }
+.shots img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+details { border-bottom: 1px solid var(--line); padding: var(--s1) 0; }
+summary { cursor: pointer; min-height: 32px; }
+.doc table { width: 100%; border-collapse: collapse; font-size: 14px; margin: var(--s2) 0; display: block; overflow-x: auto; }
+.doc th, .doc td { text-align: left; padding: var(--s1); border-bottom: 1px solid var(--line); vertical-align: top; }
+.doc code { font-size: 13px; }
+.site-footer { margin-top: var(--s4); padding-top: var(--s2); border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.site-footer nav { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.site-footer a { color: var(--muted); }
+@media (max-width: 480px) { .shots { grid-template-columns: 1fr; } }
+.foot-wrap { max-width: 480px; margin: 0 auto; padding: 0 var(--s2) var(--s3); }
