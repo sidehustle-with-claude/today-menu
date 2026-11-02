@@ -111,3 +111,11 @@
 - vercel remove, vercel domains rm, vercel env rm, vercel deploy --prod 는 실행하지 않고 명령과 이유를 알려 준다. 사람이 확인하고 직접 실행한다.
 - 실제 키는 어떤 파일에도 쓰지 않는다. 환경변수는 Vercel 화면에서 사람이 넣고, 코드는 이름으로만 읽는다.
 - vercel env pull 로 받은 파일은 .gitignore 에 있는지 먼저 확인한다.
+
+# Cloudflare 규칙
+
+- wrangler d1 명령에 --remote 가 들어가면 실행하지 말고 명령을 보여 준다.
+- DROP, DELETE, TRUNCATE 가 든 SQL은 로컬이든 원격이든 실행 전에 내 확인을 받는다.
+- 마이그레이션은 로컬에서 먼저 적용한다.
+- 비밀값은 wrangler secret 이나 .dev.vars 로만 두고, wrangler.jsonc 의 vars 에 키를 쓰지 않는다.
+- SQL 은 물음표 자리표시와 bind 로만 만든다. 문자열을 이어 붙이지 않는다.

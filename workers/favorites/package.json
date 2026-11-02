@@ -1,0 +1,15 @@
+{
+  "name": "today-menu-favorites",
+  "version": "0.1.0",
+  "private": true,
+  "description": "오늘 뭐 먹지: 즐겨찾기 API (Cloudflare Workers + D1)",
+  "scripts": {
+    "dev": "wrangler dev",
+    "migrate:local": "wrangler d1 migrations apply today-menu-db --local",
+    "migrate:list": "wrangler d1 migrations list today-menu-db --local",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.156.2"
+  }
+}

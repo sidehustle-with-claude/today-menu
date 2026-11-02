@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "today-menu-favorites",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "vars": {
+    // 키가 아니라 공개 주소입니다. 비밀값은 vars 가 아니라 wrangler secret 으로 넣습니다.
+    "ALLOWED_ORIGIN": "http://localhost:3000"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "today-menu-db",
+      // 자리표시입니다. 원격 DB 를 만들면(wrangler d1 create) 그 명령이 알려 주는 ID 로 바꿉니다.
+      "database_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ]
+}

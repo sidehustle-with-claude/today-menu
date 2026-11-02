@@ -6,6 +6,7 @@ import { recommend, type Filter } from "../src/recommend";
 import { MOCK_WEATHER, restaurants } from "../src/places";
 import { detectLang, lang, setLang, t, type Lang } from "../src/i18n";
 import { fmtDistance } from "../src/format";
+import { apiBase, pullFavorites, pushFavorite } from "../src/favorites-api";
 
 const CATEGORIES = ["한식", "분식", "카페", "중식"];
 const KEY = "favorites";
@@ -48,6 +49,15 @@ export default function Home() {
 
   useEffect(() => {
     setFavorites(readFavorites());
+    // API 주소가 있으면 서버에 저장된 즐겨찾기를 합친다. 실패하면 localStorage 만 쓴다.
+    pullFavorites(apiBase()).then((ids) => {
+      if (!ids) return;
+      const merged = Array.from(new Set([...readFavorites(), ...ids]));
+      try {
+        localStorage.setItem(KEY, JSON.stringify(merged));
+      } catch {}
+      setFavorites(merged);
+    });
     setLang(detectLang());
     setTick((n) => n + 1);
   }, []);
@@ -157,7 +167,11 @@ export default function Home() {
               className="star"
               aria-label={t("favorite.label")}
               aria-pressed={favorites.includes(r.id)}
-              onClick={() => setFavorites(toggleFavorite(r.id))}
+              onClick={() => {
+                const next = toggleFavorite(r.id);
+                setFavorites(next);
+                if (next.includes(r.id)) void pushFavorite(apiBase(), r.id, r.name);
+              }}
             >
               <Star />
             </button>

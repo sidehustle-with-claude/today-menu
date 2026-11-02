@@ -1,0 +1,3 @@
+# 로컬 시험용 비밀값 견본 (가짜 값). 실제 값은 .dev.vars 에 두고 Git 에 올리지 않습니다.
+# 원격에는 npx wrangler secret put 이름 으로 넣습니다.
+DATA_GO_KR_KEY=여기에-키
