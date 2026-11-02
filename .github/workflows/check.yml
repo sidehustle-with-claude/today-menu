@@ -1,0 +1,17 @@
+name: check
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: index.html 확인
+        run: test -f index.html
+      - name: JSON 문법 확인
+        run: |
+          for f in $(find . -name '*.json' -not -path './node_modules/*'); do
+            python3 -m json.tool "$f" > /dev/null
+          done

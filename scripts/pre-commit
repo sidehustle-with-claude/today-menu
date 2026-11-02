@@ -1,0 +1,7 @@
+#!/bin/sh
+# 커밋 직전에 비밀처럼 보이는 문자열을 찾는다.
+# 설치: cp scripts/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+if git diff --cached | grep -E -i 'api[_-]?key|secret|password|sk-[a-z0-9]{10,}|AKIA[0-9A-Z]{12,}'; then
+  echo "비밀처럼 보이는 문자열이 있어요. 커밋을 멈춥니다."
+  exit 1
+fi

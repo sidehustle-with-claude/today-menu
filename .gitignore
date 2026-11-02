@@ -1,0 +1,10 @@
+# 비밀 값과 키 파일
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# 도구가 만드는 것
+node_modules
+.DS_Store
