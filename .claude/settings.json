@@ -1,0 +1,46 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-files.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git commit *)",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-secrets.sh"
+          },
+          {
+            "type": "command",
+            "if": "Bash(rm -rf *)",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/block-danger.sh"
+          },
+          {
+            "type": "command",
+            "if": "Bash(git push --force *)",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/ask-force-push.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | xargs npx prettier --write"
+          }
+        ]
+      }
+    ]
+  }
+}
