@@ -76,6 +76,11 @@
   "permissions": {
     "deny": [
       "mcp__claude_ai_Gmail__send_message"
+    ],
+    "allow": [
+      "Bash(npm test)",
+      "Bash(git diff *)",
+      "Bash(git status)"
     ]
   },
   "env": {
