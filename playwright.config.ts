@@ -20,7 +20,8 @@ export default defineConfig({
   ],
   // 테스트 전에 앱을 켠다. 이미 켜져 있으면 재사용한다.
   webServer: {
-    command: `npm run build && npx next start -p ${PORT}`,
+    // 37장: 결제는 가짜 결제창(PAYMENTS_MOCK=1)으로만 시험한다. 외부 결제 서비스를 부르지 않는다.
+    command: `npm run build && PAYMENTS_MOCK=1 npx next start -p ${PORT}`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

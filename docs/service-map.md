@@ -10,7 +10,7 @@
 | 공공데이터포털 | `src/tools-impl.ts` | 날씨 격자 좌표, 지역 코드 (사용자 개인정보 아님) | 해당 없음 (가게 정보 출처는 약관 3) |
 | Google Gemini API | `src/llm.ts` (비교 실습용) | 서비스 화면에서는 쓰지 않음 | 해당 없음 |
 | Google Analytics | `app/google-analytics.tsx`, `src/analytics.ts` | 방문 페이지, 기기 정보, `favorite_add` 의 메뉴 종류 | 1. 수집하는 항목, 5. 처리 위탁(방문 통계와 거부 방법 포함) |
-| 결제 서비스 | 아직 없음 | | 37장에서 추가 |
+| 토스페이먼츠 | `src/payments/gateway.ts`, `app/premium/checkout.tsx` | 주문 번호, 금액, 결제 키 (카드 정보는 결제창에서 직접 입력) | 1. 수집하는 항목, 3. 보유·이용 기간, 5. 처리 위탁 |
 | 광고 | 아직 없음 | | 38장에서 추가 |
 
 반영되지 않은 서비스는 없습니다(2026년 11월 이 시점 기준, 코드 검색으로 확인).
