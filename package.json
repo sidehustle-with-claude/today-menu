@@ -18,7 +18,8 @@
     "compare": "tsx --env-file=.env scripts/compare.ts",
     "i18n": "tsx scripts/check-i18n.ts",
     "store-length": "tsx scripts/check-store-length.ts",
-    "translate": "tsx scripts/translate-changed.ts"
+    "translate": "tsx scripts/translate-changed.ts",
+    "e2e": "playwright test --project=chromium"
   },
   "dependencies": {
     "next": "16.4.4",
@@ -30,6 +31,7 @@
     "@google/genai": "^2.32.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.1",
     "@types/node": "^22.20.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.2.0",

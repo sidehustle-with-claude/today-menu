@@ -21,3 +21,10 @@ coverage
 
 # 실제 API 응답 원본 (인증키가 섞였는지 확인하기 전에는 올리지 않는다)
 samples/*.raw.json
+
+# Playwright 결과물과 로그인 상태 파일
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

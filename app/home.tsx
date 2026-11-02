@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { recommend, type Filter } from "../src/recommend";
 import { MOCK_WEATHER, restaurants } from "../src/places";
@@ -37,6 +38,7 @@ function Star() {
 
 export default function Home() {
   const [area, setArea] = useState("");
+  const [appliedArea, setAppliedArea] = useState(""); // 추천 받기를 누르면 반영된다
   const [category, setCategory] = useState("");
   const [favorites, setFavorites] = useState<string[]>([]);
   const [taste, setTaste] = useState("");
@@ -57,10 +59,10 @@ export default function Home() {
   }
 
   const picks = useMemo(() => {
-    const pool = restaurants.filter((r) => !area.trim() || r.area.includes(area.trim()));
+    const pool = restaurants.filter((r) => !appliedArea.trim() || r.area.includes(appliedArea.trim()));
     const filter: Filter = { ...tasteFilter, ...(category ? { category } : {}) };
     return recommend(pool, filter, MOCK_WEATHER);
-  }, [area, category, tasteFilter]);
+  }, [appliedArea, category, tasteFilter]);
 
   // 한 줄 취향은 내 서버(/api/taste)에만 보낸다. 키는 서버에만 있다.
   async function applyTaste() {
@@ -101,7 +103,11 @@ export default function Home() {
         aria-label={t("area.label")}
         value={area}
         onChange={(e) => setArea(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && setAppliedArea(area)}
       />
+      <button type="button" className="search" onClick={() => setAppliedArea(area)}>
+        {t("search.button")}
+      </button>
       <div className="taste">
         <input
           type="text"
@@ -134,7 +140,9 @@ export default function Home() {
         )}
         {picks.map((r) => (
           <article className="card" key={r.id} data-id={r.id}>
-            <h2>{r.name}</h2>
+            <h2>
+              <Link href={`/place/${r.id}`}>{r.name}</Link>
+            </h2>
             <p>
               {r.area} · {t(`category.${r.category}`)} · {r.hours} · {fmtDistance(r.distanceM)}
             </p>
