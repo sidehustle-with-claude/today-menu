@@ -57,3 +57,7 @@ credentials.json
 .dev.vars*
 !.dev.vars.example
 .wrangler
+
+# AWS 자격 증명 (28장)
+.aws/
+aws-credentials*

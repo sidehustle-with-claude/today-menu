@@ -1,0 +1,9 @@
+{
+  "BudgetName": "today-menu-monthly-5usd",
+  "BudgetType": "COST",
+  "TimeUnit": "MONTHLY",
+  "BudgetLimit": {
+    "Amount": "5",
+    "Unit": "USD"
+  }
+}

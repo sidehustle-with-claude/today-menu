@@ -1,0 +1,36 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyDeleteAndTerminate",
+      "Effect": "Deny",
+      "Action": [
+        "s3:DeleteObject",
+        "s3:DeleteObjectVersion",
+        "s3:DeleteBucket",
+        "ec2:TerminateInstances",
+        "lightsail:DeleteInstance",
+        "lightsail:DeleteStaticIp",
+        "rds:DeleteDBInstance"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyPermissionChanges",
+      "Effect": "Deny",
+      "Action": [
+        "iam:CreateUser",
+        "iam:CreateAccessKey",
+        "iam:PutUserPolicy",
+        "iam:AttachUserPolicy",
+        "iam:PutRolePolicy",
+        "iam:AttachRolePolicy",
+        "s3:PutBucketPolicy",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:PutAccountPublicAccessBlock",
+        "s3:PutBucketAcl"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
