@@ -1,0 +1,18 @@
+# 22장: 핵심 흐름 1개 - 동네 검색 -> 첫 추천 카드 -> 상세 제목 확인
+# appId는 app.json의 ios.bundleIdentifier(23장)·android.package(24장)와 같은 값을 쓴다.
+# 아래 값은 가짜(com.example...)이니 내 앱 값으로 바꾼다.
+appId: com.example.todaymenu
+---
+# 권한 팝업: launchApp의 permissions 기본값은 모두 허용이다. 이 앱은 아직 권한을 요청하지 않는다.
+- launchApp:
+    clearState: true
+- tapOn:
+    id: "neighborhood-input"
+- inputText: "망원동"
+- hideKeyboard
+- tapOn:
+    id: "search-button"
+- tapOn:
+    id: "place-card"
+- assertVisible:
+    id: "place-title"

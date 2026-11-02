@@ -28,3 +28,12 @@ samples/*.raw.json
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# 폰 앱(mobile/)
+mobile/node_modules/
+mobile/.expo/
+mobile/dist/
+mobile/expo-env.d.ts
+mobile/*.tsbuildinfo
+mobile/ios/
+mobile/android/

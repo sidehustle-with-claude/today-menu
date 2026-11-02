@@ -95,3 +95,8 @@
 - 테스트 파일을 고쳤다면 무엇을 왜 바꿨는지 한 줄로 보고한다.
 - e2e 는 고정 시간 대기(waitForTimeout) 없이 요소가 나타날 때까지 기다리는 확인문을 쓴다. 외부 호출은 가짜 응답으로 가로챈다.
 - 로그인 중 본인인증·문자 인증번호·보안문자가 나오는 서비스는 테스트에 넣지 않는다. 비밀번호는 코드에 쓰지 않는다.
+
+## 폰 앱 (mobile/, 22장)
+- 앱은 `mobile/` 폴더(Expo + React Native + TypeScript)에 있다. 루트의 웹과 파일을 섞지 않는다.
+- e2e 테스트에 필요한 요소에만 `testID`를 단다: neighborhood-input, search-button, place-card, place-title. 화면 모양과 동작은 바꾸지 않는다.
+- 앱 e2e 흐름은 `mobile/.maestro/` 아래에 두고 핵심 흐름 2~3개만 지킨다. 기대값은 테스트를 통과시키려고 바꾸지 않는다.
