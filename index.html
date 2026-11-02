@@ -18,6 +18,7 @@
     .card p { margin: 0; color: #555; }
     .card { position: relative; }
     .star { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; font-size: 22px; border: 0; background: none; color: #bbb; cursor: pointer; }
+    .menus button[aria-pressed="true"] { background: #222; color: #fff; }
     .star[aria-pressed="true"] { color: #e8a200; }
   </style>
 </head>
@@ -25,46 +26,102 @@
   <main>
     <h1>오늘 뭐 먹지</h1>
     <p class="hint">동네와 메뉴를 고르면 오늘 갈 만한 곳 3곳을 골라 드려요.</p>
-    <input type="text" placeholder="동네 이름을 넣어 주세요" aria-label="동네 이름">
+    <input id="area" type="text" placeholder="동네 이름을 넣어 주세요" aria-label="동네 이름">
     <div class="menus">
       <button type="button">한식</button>
       <button type="button">분식</button>
       <button type="button">카페</button>
       <button type="button">중식</button>
     </div>
-    <section>
-      <article class="card"><h2>가게 이름 1</h2><p>한 줄 이유</p><button type="button" class="star" aria-pressed="false" aria-label="즐겨찾기">★</button></article>
-      <article class="card"><h2>가게 이름 2</h2><p>한 줄 이유</p><button type="button" class="star" aria-pressed="false" aria-label="즐겨찾기">★</button></article>
-      <article class="card"><h2>가게 이름 3</h2><p>한 줄 이유</p><button type="button" class="star" aria-pressed="false" aria-label="즐겨찾기">★</button></article>
-    </section>
+    <section id="cards" aria-live="polite"></section>
   </main>
   <script>
-    // 즐겨찾기: 가게 이름을 localStorage의 favorites 배열에 저장한다. 저장이 막힌 브라우저에서도 화면은 깨지지 않는다.
+    // 데이터는 public/data/restaurants.json (가상 데이터). file:// 로 열면 fetch가 막히니 로컬 서버로 연다 (예: 저장소 루트에서 python3 -m http.server 8000).
     var KEY = "favorites";
+    var restaurants = [];
+    var category = "";
+
+    // 예제 12-1: 즐겨찾기 읽기와 쓰기
     function readFavorites() {
-      try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; }
+      try {
+        return JSON.parse(localStorage.getItem(KEY)) ?? [];
+      } catch {
+        return [];
+      }
     }
-    function writeFavorites(list) {
-      try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) {}
+
+    function toggleFavorite(id) {
+      var now = readFavorites();
+      var next = now.includes(id)
+        ? now.filter(function (x) { return x !== id; })
+        : [].concat(now, [id]);
+      try {
+        localStorage.setItem(KEY, JSON.stringify(next));
+      } catch {}
+      return next;
     }
-    function paint() {
+
+    function pick(list, n) {
+      var copy = list.slice();
+      var out = [];
+      while (copy.length && out.length < n) {
+        out.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+      }
+      return out;
+    }
+
+    function render() {
+      var area = document.getElementById("area").value.trim();
+      var list = restaurants.filter(function (r) {
+        return (!area || r.area.indexOf(area) >= 0) && (!category || r.category === category);
+      });
       var favs = readFavorites();
-      document.querySelectorAll(".card").forEach(function (card) {
-        var name = card.querySelector("h2").textContent;
-        card.querySelector(".star").setAttribute("aria-pressed", favs.indexOf(name) >= 0 ? "true" : "false");
+      var box = document.getElementById("cards");
+      box.innerHTML = "";
+      if (!list.length) {
+        box.textContent = "조건에 맞는 가게가 없어요. 동네나 메뉴를 바꿔 보세요.";
+        return;
+      }
+      pick(list, 3).forEach(function (r) {
+        var card = document.createElement("article");
+        card.className = "card";
+        card.dataset.id = r.id;
+        var h2 = document.createElement("h2");
+        h2.textContent = r.name;
+        var p = document.createElement("p");
+        p.textContent = r.area + " · " + r.category + " · " + r.hours;
+        var star = document.createElement("button");
+        star.type = "button";
+        star.className = "star";
+        star.setAttribute("aria-label", "즐겨찾기");
+        star.setAttribute("aria-pressed", favs.includes(r.id) ? "true" : "false");
+        star.textContent = "★";
+        star.addEventListener("click", function () {
+          var next = toggleFavorite(r.id);
+          star.setAttribute("aria-pressed", next.includes(r.id) ? "true" : "false");
+        });
+        card.append(h2, p, star);
+        box.appendChild(card);
       });
     }
-    document.querySelectorAll(".card").forEach(function (card) {
-      card.querySelector(".star").addEventListener("click", function () {
-        var name = card.querySelector("h2").textContent;
-        var favs = readFavorites();
-        var i = favs.indexOf(name);
-        if (i >= 0) favs.splice(i, 1); else favs.push(name);
-        writeFavorites(favs);
-        paint();
+
+    document.querySelectorAll(".menus button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        category = category === btn.textContent ? "" : btn.textContent;
+        document.querySelectorAll(".menus button").forEach(function (b) {
+          b.setAttribute("aria-pressed", b.textContent === category ? "true" : "false");
+        });
+        render();
       });
     });
-    paint();
+    document.getElementById("area").addEventListener("input", render);
+
+    fetch("public/data/restaurants.json")
+      .then(function (res) { return res.json(); })
+      .then(function (data) { restaurants = data; render(); })
+      .catch(function () {
+        document.getElementById("cards").textContent = "가게 목록을 불러오지 못했어요. 로컬 서버로 열었는지 확인하세요.";
+      });
   </script>
 </body>
 </html>
