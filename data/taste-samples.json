@@ -1,0 +1,12 @@
+[
+  { "id": "s01", "level": "쉬움", "text": "국물 있는 한식 혼밥", "answer": { "category": "한식", "avoid": [], "solo": true } },
+  { "id": "s02", "level": "쉬움", "text": "매운 거 말고 분식", "answer": { "category": "분식", "avoid": ["매운"], "solo": false } },
+  { "id": "s03", "level": "쉬움", "text": "혼자 커피 마실 곳", "answer": { "category": "카페", "avoid": [], "solo": true } },
+  { "id": "s04", "level": "쉬움", "text": "중식인데 해산물은 빼고", "answer": { "category": "중식", "avoid": ["해산물"], "solo": false } },
+  { "id": "s05", "level": "애매", "text": "매운 건 싫고 든든한 거", "answer": { "avoid": ["매운"], "solo": false } },
+  { "id": "s06", "level": "애매", "text": "가볍게 먹고 싶어", "answer": { "avoid": [], "solo": false } },
+  { "id": "s07", "level": "애매", "text": "혼밥하기 편한 곳", "answer": { "avoid": [], "solo": true } },
+  { "id": "s08", "level": "어려움", "text": "어제 먹은 거 말고 비슷한 느낌", "answer": { "avoid": [], "solo": false } },
+  { "id": "s09", "level": "어려움", "text": "너무 안 비싸게", "answer": { "avoid": [], "solo": false } },
+  { "id": "s10", "level": "어려움", "text": "안 맵게 말고 매운 걸로, 혼자서", "answer": { "avoid": [], "solo": true } }
+]
