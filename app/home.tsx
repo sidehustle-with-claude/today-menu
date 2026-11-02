@@ -132,6 +132,7 @@ export default function Home() {
           </article>
         ))}
       </section>
+      <p className="hint source">출처: 공공데이터포털 (기상청 단기예보, 한국관광공사 TourAPI). 화면의 가게 목록은 가상 데이터입니다.</p>
     </main>
   );
 }

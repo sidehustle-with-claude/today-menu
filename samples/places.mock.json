@@ -1,0 +1,18 @@
+{
+  "response": {
+    "header": { "resultCode": "0000", "resultMsg": "OK" },
+    "body": {
+      "items": {
+        "item": [
+          { "title": "가상 국밥집 하나", "addr1": "가상시 새솔동 1번지", "tel": "000-0000-0001", "contenttypeid": "39" },
+          { "title": "가상 칼국수 두리", "addr1": "가상시 새솔동 2번지", "tel": "000-0000-0002", "contenttypeid": "39" },
+          { "title": "가상 백반 세움", "addr1": "가상시 새솔동 3번지", "tel": "000-0000-0003", "contenttypeid": "39" },
+          { "title": "가상 순두부 마루", "addr1": "가상시 한울동 4번지", "tel": "000-0000-0004", "contenttypeid": "39" }
+        ]
+      },
+      "numOfRows": 8,
+      "pageNo": 1,
+      "totalCount": 4
+    }
+  }
+}
