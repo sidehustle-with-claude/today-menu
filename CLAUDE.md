@@ -100,3 +100,7 @@
 - 앱은 `mobile/` 폴더(Expo + React Native + TypeScript)에 있다. 루트의 웹과 파일을 섞지 않는다.
 - e2e 테스트에 필요한 요소에만 `testID`를 단다: neighborhood-input, search-button, place-card, place-title. 화면 모양과 동작은 바꾸지 않는다.
 - 앱 e2e 흐름은 `mobile/.maestro/` 아래에 두고 핵심 흐름 2~3개만 지킨다. 기대값은 테스트를 통과시키려고 바꾸지 않는다.
+
+## 서명 키 (24장)
+- 키 저장소(`*.jks`, `*.keystore`)와 서비스 계정 키(JSON), 그 비밀번호는 읽거나 출력하거나 파일로 만들지 않는다. 사람이 직접 만들어 EAS 대시보드에 올린다.
+- 스토어 제출 버튼과 앱 콘텐츠 선언 체크는 사람이 직접 한다.

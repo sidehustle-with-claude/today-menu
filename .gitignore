@@ -37,3 +37,15 @@ mobile/expo-env.d.ts
 mobile/*.tsbuildinfo
 mobile/ios/
 mobile/android/
+
+# 서명 키와 서비스 계정 키 (24장) - 저장소에 올리지 않는다
+*.jks
+*.keystore
+*.p8
+*.p12
+*.mobileprovision
+google-service-account*.json
+play-service-account*.json
+*-service-account*.json
+service-account*.json
+credentials.json
