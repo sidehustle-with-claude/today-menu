@@ -8,3 +8,6 @@
 # 도구가 만드는 것
 node_modules
 .DS_Store
+
+references/*.png
+references/*.jpg

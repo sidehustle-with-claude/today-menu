@@ -5,21 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>오늘 뭐 먹지</title>
   <style>
+    /* 값은 DESIGN.md 에서만 가져온다. */
+    :root {
+      --bg: #ffffff;
+      --text: #1f2933;
+      --muted: #6b7785;
+      --accent: #e8590c;
+      --line: #e4e7eb;
+      --radius: 12px;
+      --s1: 8px;
+      --s2: 16px;
+      --s3: 24px;
+      --s4: 32px;
+    }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: system-ui, sans-serif; background: #fafaf7; color: #222; }
-    main { max-width: 480px; margin: 0 auto; padding: 24px 16px; }
-    h1 { font-size: 24px; margin: 0 0 8px; }
-    .hint { margin: 0 0 16px; color: #555; }
-    input { width: 100%; height: 44px; padding: 0 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; }
-    .menus { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0 20px; }
-    .menus button { height: 44px; font-size: 16px; border: 1px solid #ccc; border-radius: 8px; background: #fff; }
-    .card { background: #fff; border: 1px solid #e5e5e0; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
-    .card h2 { font-size: 18px; margin: 0 0 4px; }
-    .card p { margin: 0; color: #555; }
-    .card { position: relative; }
-    .star { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; font-size: 22px; border: 0; background: none; color: #bbb; cursor: pointer; }
-    .menus button[aria-pressed="true"] { background: #222; color: #fff; }
-    .star[aria-pressed="true"] { color: #e8a200; }
+    body { margin: 0; font-family: system-ui, -apple-system, sans-serif; font-size: 16px; background: var(--bg); color: var(--text); }
+    main { max-width: 480px; margin: 0 auto; padding: var(--s3) var(--s2); }
+    h1 { font-size: 24px; margin: 0 0 var(--s1); }
+    .hint { margin: 0 0 var(--s2); color: var(--muted); font-size: 13px; }
+    input { width: 100%; height: 48px; padding: 0 var(--s2); font: inherit; color: var(--text); border: 1px solid var(--line); border-radius: var(--radius); }
+    .menus { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s1); margin: var(--s2) 0 var(--s3); }
+    .menus button { height: 48px; font: inherit; color: var(--text); border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); cursor: pointer; }
+    .menus button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+    #cards { border-top: 1px solid var(--line); }
+    .card { position: relative; padding: var(--s2) 56px var(--s2) 0; border-bottom: 1px solid var(--line); }
+    .card h2 { font-size: 16px; margin: 0 0 var(--s1); }
+    .card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .star { position: absolute; top: 50%; right: 0; transform: translateY(-50%); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border: 0; background: none; color: var(--line); cursor: pointer; }
+    .star svg { width: 24px; height: 24px; fill: currentColor; }
+    .star[aria-pressed="true"] { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -38,6 +52,7 @@
   <script>
     // 데이터는 public/data/restaurants.json (가상 데이터). file:// 로 열면 fetch가 막히니 로컬 서버로 연다 (예: 저장소 루트에서 python3 -m http.server 8000).
     var KEY = "favorites";
+    var STAR_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>';
     var restaurants = [];
     var category = "";
 
@@ -95,7 +110,7 @@
         star.className = "star";
         star.setAttribute("aria-label", "즐겨찾기");
         star.setAttribute("aria-pressed", favs.includes(r.id) ? "true" : "false");
-        star.textContent = "★";
+        star.innerHTML = STAR_SVG;
         star.addEventListener("click", function () {
           var next = toggleFavorite(r.id);
           star.setAttribute("aria-pressed", next.includes(r.id) ? "true" : "false");
