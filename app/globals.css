@@ -28,3 +28,6 @@ input { width: 100%; height: 48px; padding: 0 var(--s2); font: inherit; color: v
 .star svg { width: 24px; height: 24px; fill: currentColor; }
 .star[aria-pressed="true"] { color: var(--accent); }
 .empty { padding: var(--s2) 0; color: var(--muted); }
+.taste { display: grid; grid-template-columns: 1fr 72px; gap: var(--s1); margin-top: var(--s1); }
+.taste button { height: 48px; font: inherit; color: var(--bg); background: var(--accent); border: 0; border-radius: var(--radius); cursor: pointer; }
+.taste button:disabled { background: var(--line); color: var(--muted); cursor: default; }

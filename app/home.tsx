@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { recommend } from "../src/recommend";
+import { recommend, type Filter } from "../src/recommend";
 import { MOCK_WEATHER, restaurants } from "../src/places";
 
 const CATEGORIES = ["한식", "분식", "카페", "중식"];
@@ -37,6 +37,9 @@ export default function Home() {
   const [area, setArea] = useState("");
   const [category, setCategory] = useState("");
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [taste, setTaste] = useState("");
+  const [tasteFilter, setTasteFilter] = useState<Filter>({});
+  const [tasteMsg, setTasteMsg] = useState("");
 
   useEffect(() => {
     setFavorites(readFavorites());
@@ -44,8 +47,31 @@ export default function Home() {
 
   const picks = useMemo(() => {
     const pool = restaurants.filter((r) => !area.trim() || r.area.includes(area.trim()));
-    return recommend(pool, category ? { category } : {}, MOCK_WEATHER);
-  }, [area, category]);
+    const filter: Filter = { ...tasteFilter, ...(category ? { category } : {}) };
+    return recommend(pool, filter, MOCK_WEATHER);
+  }, [area, category, tasteFilter]);
+
+  // 한 줄 취향은 내 서버(/api/taste)에만 보낸다. 키는 서버에만 있다.
+  async function applyTaste() {
+    setTasteMsg("");
+    try {
+      const res = await fetch("/api/taste", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ text: taste }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setTasteFilter({});
+        setTasteMsg(data.error ?? "취향을 읽지 못했어요.");
+        return;
+      }
+      setTasteFilter(data.filter);
+      setTasteMsg("취향을 반영했어요.");
+    } catch {
+      setTasteMsg("취향을 읽지 못했어요. 메뉴 버튼으로 골라 주세요.");
+    }
+  }
 
   return (
     <main>
@@ -58,6 +84,20 @@ export default function Home() {
         value={area}
         onChange={(e) => setArea(e.target.value)}
       />
+      <div className="taste">
+        <input
+          type="text"
+          maxLength={100}
+          placeholder="한 줄 취향 (예: 매운 거 말고, 혼밥)"
+          aria-label="한 줄 취향"
+          value={taste}
+          onChange={(e) => setTaste(e.target.value)}
+        />
+        <button type="button" onClick={applyTaste} disabled={!taste.trim()}>
+          반영
+        </button>
+      </div>
+      <p className="hint">개인정보는 적지 마세요. {tasteMsg}</p>
       <div className="menus">
         {CATEGORIES.map((c) => (
           <button
