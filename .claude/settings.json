@@ -64,5 +64,10 @@
         ]
       }
     ]
+  },
+  "permissions": {
+    "deny": [
+      "mcp__claude_ai_Gmail__send_message"
+    ]
   }
 }
