@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { clampTitle, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "../src/site";
 
 export const metadata: Metadata = {
-  title: "오늘 뭐 먹지",
-  description: "동네와 메뉴를 고르면 오늘 갈 만한 곳 3곳을 골라 드려요.",
+  metadataBase: new URL(SITE_URL),
+  title: clampTitle(`${SITE_NAME}: 동네 맛집 추천`),
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    type: "website",
+    locale: "ko_KR",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

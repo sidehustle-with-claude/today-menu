@@ -150,3 +150,11 @@
 - 법령을 말할 때는 법령 MCP 로 원문을 찾고, 조 번호와 law.go.kr 링크를 함께 적는다. 원문을 못 찾으면 "원문 확인 못 함"이라고 쓴다. 기억으로 법 내용을 대신 말하지 않는다.
 - 외부 서비스를 붙이거나 바꾸면 docs/data-inventory.md, docs/service-map.md, docs/privacy-policy.md 를 같이 고친다.
 - 상호, 대표자, 연락처 같은 사업자 정보는 예시 값만 쓰고, 실제 값은 사람이 직접 넣는다.
+
+# SEO 규칙
+
+- 사이트 주소와 공통 문구는 src/site.ts 에서만 가져온다. 주소를 다른 곳에 직접 쓰지 않는다.
+- sitemap 에는 공개해도 되는 페이지만 넣는다. priority 와 changeFrequency 는 쓰지 않고, lastModified 는 실제로 바뀐 날짜만 쓴다.
+- robots 에서 `Disallow: /` 를 쓰지 않는다. 개인 화면은 noindex 로 막는다.
+- 페이지마다 title 과 description 이 달라야 하고 title 은 60자 안쪽, h1 은 페이지당 하나다.
+- 순위·색인을 약속하는 문구를 쓰지 않는다.
