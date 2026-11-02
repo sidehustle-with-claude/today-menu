@@ -66,3 +66,8 @@ aws-credentials*
 blog-example/_site/
 blog-example/.jekyll-cache/
 blog-example/.sass-cache/
+
+# 환경변수 (38장, 앱). 양식은 mobile/.env.example
+mobile/.env
+mobile/.env.*
+!mobile/.env.example

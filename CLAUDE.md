@@ -196,3 +196,13 @@
 - 웹훅은 받은 내용을 믿지 않고 결제 조회로 다시 확인한다.
 - `live_` 키는 쓰지 않는다. 테스트 키 또는 가짜 결제창(`PAYMENTS_MOCK=1`)만 쓴다.
 - 법령 내용은 원문을 확인하기 전에는 확정해서 쓰지 않는다. 결제를 붙이면 `docs/privacy-policy.md` 와 `docs/service-map.md` 를 함께 고친다.
+
+## 광고 (38장, 앱)
+- 개발 모드(`__DEV__`)에서는 어떤 경우에도 실제 광고 단위 ID를 쓰지 않는다. 광고 단위 선택은 `mobile/src/ads/adUnits.ts`의 `resolveBannerUnitId`만 거친다.
+- 광고 단위·앱 ID는 코드에 직접 쓰지 않고 `.env`에서 읽는다. 코드에 들어가는 광고 ID는 구글 공식 샘플 ID뿐이다.
+- 광고를 직접 눌러 보는 시험을 하지 않는다. 광고 SDK를 바꾸면 `docs/app-data-inventory.md`와 개인정보처리방침, 스토어 데이터 양식도 같이 고친다.
+
+## 광고 (38장, 웹)
+- 애드센스 게시자 ID 는 `NEXT_PUBLIC_ADSENSE_PUB` 환경변수에서만 읽고 코드에 쓰지 않는다. 광고 코드는 `app/ad-slot.tsx` 한 곳에서만 붙인다.
+- `/ads.txt` 는 내 줄 하나만 낸다(`src/adsense.ts`). ID 가 없으면 404 이다.
+- 내 사이트의 광고를 직접 누르지 않는다.

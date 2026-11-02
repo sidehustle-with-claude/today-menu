@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AdSlot from "../ad-slot";
 import Home from "../home";
 import SiteFooter from "../site-footer";
 
@@ -13,6 +14,9 @@ export default function MenuPage() {
   return (
     <>
       <Home />
+      <div className="foot-wrap">
+        <AdSlot />
+      </div>
       <div className="foot-wrap">
         <SiteFooter />
       </div>

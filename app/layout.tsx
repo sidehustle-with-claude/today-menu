@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AdSenseScript } from "./ad-slot";
 import GoogleAnalytics from "./google-analytics";
 import { clampTitle, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "../src/site";
 import { verificationMeta } from "../src/verification";
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <GoogleAnalytics />
+        <AdSenseScript />
       </body>
     </html>
   );

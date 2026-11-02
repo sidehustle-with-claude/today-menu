@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { searchPlaces } from '../search';
+import AdBanner from '../ads/AdBanner';
 import type { Place } from '../types';
 
 type Props = {
@@ -51,6 +52,7 @@ export default function HomeScreen({ onSelect }: Props) {
           )}
         />
       )}
+      <AdBanner />
     </View>
   );
 }

@@ -11,6 +11,6 @@
 | Google Gemini API | `src/llm.ts` (비교 실습용) | 서비스 화면에서는 쓰지 않음 | 해당 없음 |
 | Google Analytics | `app/google-analytics.tsx`, `src/analytics.ts` | 방문 페이지, 기기 정보, `favorite_add` 의 메뉴 종류 | 1. 수집하는 항목, 5. 처리 위탁(방문 통계와 거부 방법 포함) |
 | 토스페이먼츠 | `src/payments/gateway.ts`, `app/premium/checkout.tsx` | 주문 번호, 금액, 결제 키 (카드 정보는 결제창에서 직접 입력) | 1. 수집하는 항목, 3. 보유·이용 기간, 5. 처리 위탁 |
-| 광고 | 아직 없음 | | 38장에서 추가 |
+| Google AdSense(웹), AdMob(앱) | `app/ad-slot.tsx`, `app/ads.txt/route.ts`, `mobile/src/ads` | 쿠키·광고 식별자(광고 서비스가 직접 수집) | 1. 수집하는 항목, 5. 처리 위탁 |
 
 반영되지 않은 서비스는 없습니다(2026년 11월 이 시점 기준, 코드 검색으로 확인).
