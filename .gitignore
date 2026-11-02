@@ -87,3 +87,6 @@ video/*
 !video/.gitkeep
 output/*
 !output/.gitkeep
+
+# 50장: claude --worktree 가 만드는 작업 폴더
+.claude/worktrees/
