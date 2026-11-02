@@ -59,6 +59,14 @@
             "command": ".claude/hooks/require-tests.sh"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/hooks/ask-to-record.sh"
+          }
+        ]
       }
     ],
     "Notification": [
@@ -68,6 +76,17 @@
           {
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/notify-ask.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/hooks/inject-decisions.sh"
           }
         ]
       }
