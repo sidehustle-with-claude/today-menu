@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import GoogleAnalytics from "./google-analytics";
 import { clampTitle, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "../src/site";
+import { verificationMeta } from "../src/verification";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
   },
+  verification: verificationMeta(),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
