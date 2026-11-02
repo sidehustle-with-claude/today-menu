@@ -104,3 +104,10 @@
 ## 서명 키 (24장)
 - 키 저장소(`*.jks`, `*.keystore`)와 서비스 계정 키(JSON), 그 비밀번호는 읽거나 출력하거나 파일로 만들지 않는다. 사람이 직접 만들어 EAS 대시보드에 올린다.
 - 스토어 제출 버튼과 앱 콘텐츠 선언 체크는 사람이 직접 한다.
+
+# 배포 규칙
+
+- Vercel CLI 는 vercel list, vercel inspect, vercel logs, vercel env ls 같은 읽기 명령만 쓴다.
+- vercel remove, vercel domains rm, vercel env rm, vercel deploy --prod 는 실행하지 않고 명령과 이유를 알려 준다. 사람이 확인하고 직접 실행한다.
+- 실제 키는 어떤 파일에도 쓰지 않는다. 환경변수는 Vercel 화면에서 사람이 넣고, 코드는 이름으로만 읽는다.
+- vercel env pull 로 받은 파일은 .gitignore 에 있는지 먼저 확인한다.

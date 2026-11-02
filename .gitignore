@@ -49,3 +49,6 @@ play-service-account*.json
 *-service-account*.json
 service-account*.json
 credentials.json
+
+# Vercel
+.vercel
