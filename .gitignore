@@ -74,3 +74,10 @@ mobile/.env.*
 
 # 40장: 텔레그램 토큰 (이미 위에 있어도 한 번 더 확인용)
 .env
+
+# 46장: 소리 원본과 받아쓰기 부산물
+audio/*.m4a
+audio/*.mp3
+audio/parts/
+out/*/
+out/*.time
