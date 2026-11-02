@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.example.today-menu.revive</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/내이름/bin/revive-sessions.sh</string>
+  </array>
+  <!-- 로그인해서 이 설정을 불러올 때 한 번만 실행. 이 키는 이 파일 하나에만 쓴다. -->
+  <key>RunAtLoad</key><true/>
+  <key>StandardOutPath</key><string>/Users/내이름/.local/state/today-menu/revive.out</string>
+  <key>StandardErrorPath</key><string>/Users/내이름/.local/state/today-menu/revive.err</string>
+</dict>
+</plist>
