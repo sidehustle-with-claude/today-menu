@@ -24,5 +24,14 @@
   "weather.clear": "a clear day",
   "favorite.label": "Favorite",
   "footer.source": "Weather: KMA, Restaurants: Korea Tourism Organization",
-  "footer.mock": "The restaurant list on screen is fictional sample data."
+  "footer.mock": "The restaurant list on screen is fictional sample data.",
+  "auth.email": "Email",
+  "auth.password": "Password",
+  "auth.login": "Log in",
+  "auth.signup": "Sign up",
+  "auth.logout": "Log out",
+  "auth.signedInAs": "Signed in as {email}",
+  "auth.needLogin": "Log in to save your favorites.",
+  "auth.checkMail": "We sent a confirmation email. Click the link, then log in.",
+  "auth.error": "Sign-up or login failed. Please check your input."
 }

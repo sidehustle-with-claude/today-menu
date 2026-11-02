@@ -7,6 +7,9 @@ import { MOCK_WEATHER, restaurants } from "../src/places";
 import { detectLang, lang, setLang, t, type Lang } from "../src/i18n";
 import { fmtDistance } from "../src/format";
 import { apiBase, pullFavorites, pushFavorite } from "../src/favorites-api";
+import { getSupabase } from "../src/supabase";
+import { addFavorite, loadFavoriteIds, removeFavorite, type FavoritesDb } from "../src/favorites-supabase";
+import AuthBox, { type AuthUser } from "./auth-box";
 
 const CATEGORIES = ["한식", "분식", "카페", "중식"];
 const KEY = "favorites";
@@ -46,6 +49,9 @@ export default function Home() {
   const [tasteFilter, setTasteFilter] = useState<Filter>({});
   const [tasteMsg, setTasteMsg] = useState("");
   const [, setTick] = useState(0); // 언어를 바꾸면 화면을 다시 그린다
+  const sb = getSupabase(); // 환경변수가 없으면 null: 로그인 없이 localStorage 로만 동작한다
+  const [user, setUser] = useState<AuthUser>(null);
+  const [needLogin, setNeedLogin] = useState(false);
 
   useEffect(() => {
     setFavorites(readFavorites());
@@ -61,6 +67,26 @@ export default function Home() {
     setLang(detectLang());
     setTick((n) => n + 1);
   }, []);
+
+  // 로그인 상태를 따라가고, 로그인하면 내 즐겨찾기(RLS 가 내 것만 돌려준다)를 합친다.
+  useEffect(() => {
+    if (!sb) return;
+    const apply = (u: { id: string; email?: string } | undefined) => {
+      setUser(u ? { id: u.id, email: u.email ?? "" } : null);
+      if (!u) return;
+      setNeedLogin(false);
+      loadFavoriteIds(sb as unknown as FavoritesDb).then((ids) => {
+        if (!ids) return;
+        const merged = Array.from(new Set([...readFavorites(), ...ids]));
+        try {
+          localStorage.setItem(KEY, JSON.stringify(merged));
+        } catch {}
+        setFavorites(merged);
+      });
+    };
+    const { data } = sb.auth.onAuthStateChange((_event, session) => apply(session?.user));
+    return () => data.subscription.unsubscribe();
+  }, [sb]);
 
   function chooseLang(next: Lang) {
     setLang(next);
@@ -105,6 +131,7 @@ export default function Home() {
           </button>
         ))}
       </div>
+      {sb && <AuthBox sb={sb} user={user} />}
       <h1>{t("app.title")}</h1>
       <p className="hint">{t("app.hint")}</p>
       <input
@@ -144,6 +171,7 @@ export default function Home() {
           </button>
         ))}
       </div>
+      {needLogin && <p className="hint" role="status">{t("auth.needLogin")}</p>}
       <section className="cards" aria-live="polite">
         {picks.length === 0 && (
           <p className="empty">{t("result.none")}</p>
@@ -168,9 +196,19 @@ export default function Home() {
               aria-label={t("favorite.label")}
               aria-pressed={favorites.includes(r.id)}
               onClick={() => {
+                if (sb && !user) {
+                  setNeedLogin(true); // 로그인하지 않으면 즐겨찾기 대신 로그인 안내를 보여 준다
+                  return;
+                }
                 const next = toggleFavorite(r.id);
                 setFavorites(next);
-                if (next.includes(r.id)) void pushFavorite(apiBase(), r.id, r.name);
+                if (sb && user) {
+                  const db = sb as unknown as FavoritesDb;
+                  if (next.includes(r.id)) void addFavorite(db, user.id, r.id, r.name);
+                  else void removeFavorite(db, r.id);
+                } else if (next.includes(r.id)) {
+                  void pushFavorite(apiBase(), r.id, r.name);
+                }
               }}
             >
               <Star />

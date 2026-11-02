@@ -24,5 +24,14 @@
   "weather.clear": "맑은 날",
   "favorite.label": "즐겨찾기",
   "footer.source": "날씨: 기상청, 음식점: 한국관광공사",
-  "footer.mock": "화면의 가게 목록은 가상 데이터입니다."
+  "footer.mock": "화면의 가게 목록은 가상 데이터입니다.",
+  "auth.email": "이메일",
+  "auth.password": "비밀번호",
+  "auth.login": "로그인",
+  "auth.signup": "가입",
+  "auth.logout": "로그아웃",
+  "auth.signedInAs": "{email} 로 로그인했어요",
+  "auth.needLogin": "로그인하면 즐겨찾기를 저장해요.",
+  "auth.checkMail": "확인 메일을 보냈어요. 메일의 링크를 누른 뒤 로그인하세요.",
+  "auth.error": "가입이나 로그인에 실패했어요. 입력을 확인해 주세요."
 }

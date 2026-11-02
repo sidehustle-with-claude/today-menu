@@ -119,3 +119,11 @@
 - 마이그레이션은 로컬에서 먼저 적용한다.
 - 비밀값은 wrangler secret 이나 .dev.vars 로만 두고, wrangler.jsonc 의 vars 에 키를 쓰지 않는다.
 - SQL 은 물음표 자리표시와 bind 로만 만든다. 문자열을 이어 붙이지 않는다.
+
+# Supabase 규칙
+
+- Supabase 에서 새 표를 만들면 같은 마이그레이션에 RLS 활성화와 정책을 함께 쓴다. RLS 없는 표는 만들지 않는다. (npm test 의 src/rls-check.test.ts 가 db/*.sql 을 검사한다)
+- 비밀 키(sb_secret_...)와 service_role 키는 어떤 클라이언트 코드, 저장소, 채팅에도 쓰지 않는다. 공개 키만 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY 로 읽는다.
+- Supabase MCP 는 운영 프로젝트에는 읽기 전용(?read_only=true)과 프로젝트 한정(?project_ref=...)으로만 연결한다.
+- 삭제, 초기화, 표 구조 변경은 하지 않는다. SQL 파일을 만들고 사람이 SQL Editor 에서 실행한다.
+- RLS 때문에 조회가 0건이면 RLS 를 끄거나 비밀 키로 바꾸지 않는다. 정책과 로그인 상태를 먼저 점검한다.
