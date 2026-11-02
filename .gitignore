@@ -61,3 +61,8 @@ credentials.json
 # AWS 자격 증명 (28장)
 .aws/
 aws-credentials*
+
+# 블로그 예시 빌드 산출물 (29장)
+blog-example/_site/
+blog-example/.jekyll-cache/
+blog-example/.sass-cache/

@@ -1,0 +1,5 @@
+title: 오늘 뭐 먹지 개발 기록
+description: 클로드와 함께 작은 서비스를 만들며 겪은 일을 기록합니다.
+lang: ko
+# 외부 테마 없이 GitHub Pages 기본 방식으로 빌드한다.
+# 저장소 이름이 <계정>.github.io 이면 url과 baseurl은 비워 둔다.
