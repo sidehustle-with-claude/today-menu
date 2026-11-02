@@ -16,6 +16,9 @@
     .card { background: #fff; border: 1px solid #e5e5e0; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
     .card h2 { font-size: 18px; margin: 0 0 4px; }
     .card p { margin: 0; color: #555; }
+    .card { position: relative; }
+    .star { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; font-size: 22px; border: 0; background: none; color: #bbb; cursor: pointer; }
+    .star[aria-pressed="true"] { color: #e8a200; }
   </style>
 </head>
 <body>
@@ -30,10 +33,38 @@
       <button type="button">중식</button>
     </div>
     <section>
-      <article class="card"><h2>가게 이름</h2><p>한 줄 이유</p></article>
-      <article class="card"><h2>가게 이름</h2><p>한 줄 이유</p></article>
-      <article class="card"><h2>가게 이름</h2><p>한 줄 이유</p></article>
+      <article class="card"><h2>가게 이름 1</h2><p>한 줄 이유</p><button type="button" class="star" aria-pressed="false" aria-label="즐겨찾기">★</button></article>
+      <article class="card"><h2>가게 이름 2</h2><p>한 줄 이유</p><button type="button" class="star" aria-pressed="false" aria-label="즐겨찾기">★</button></article>
+      <article class="card"><h2>가게 이름 3</h2><p>한 줄 이유</p><button type="button" class="star" aria-pressed="false" aria-label="즐겨찾기">★</button></article>
     </section>
   </main>
+  <script>
+    // 즐겨찾기: 가게 이름을 localStorage의 favorites 배열에 저장한다. 저장이 막힌 브라우저에서도 화면은 깨지지 않는다.
+    var KEY = "favorites";
+    function readFavorites() {
+      try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; }
+    }
+    function writeFavorites(list) {
+      try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) {}
+    }
+    function paint() {
+      var favs = readFavorites();
+      document.querySelectorAll(".card").forEach(function (card) {
+        var name = card.querySelector("h2").textContent;
+        card.querySelector(".star").setAttribute("aria-pressed", favs.indexOf(name) >= 0 ? "true" : "false");
+      });
+    }
+    document.querySelectorAll(".card").forEach(function (card) {
+      card.querySelector(".star").addEventListener("click", function () {
+        var name = card.querySelector("h2").textContent;
+        var favs = readFavorites();
+        var i = favs.indexOf(name);
+        if (i >= 0) favs.splice(i, 1); else favs.push(name);
+        writeFavorites(favs);
+        paint();
+      });
+    });
+    paint();
+  </script>
 </body>
 </html>
