@@ -8,14 +8,17 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run && tsx scripts/check-i18n.ts",
     "csv": "node scripts/csv-to-json.js",
     "repeat-check": "tsx scripts/repeat-check.ts",
     "eval": "node eval/score.js",
     "try-taste": "MOCK_LLM=1 tsx scripts/try-taste.ts",
     "try-ask": "tsx --env-file=.env scripts/try-ask.ts",
     "mcp": "tsx src/mcp-server.ts",
-    "compare": "tsx --env-file=.env scripts/compare.ts"
+    "compare": "tsx --env-file=.env scripts/compare.ts",
+    "i18n": "tsx scripts/check-i18n.ts",
+    "store-length": "tsx scripts/check-store-length.ts",
+    "translate": "tsx scripts/translate-changed.ts"
   },
   "dependencies": {
     "next": "16.4.4",

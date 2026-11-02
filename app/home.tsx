@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { recommend, type Filter } from "../src/recommend";
 import { MOCK_WEATHER, restaurants } from "../src/places";
+import { detectLang, lang, setLang, t, type Lang } from "../src/i18n";
+import { fmtDistance } from "../src/format";
 
 const CATEGORIES = ["한식", "분식", "카페", "중식"];
 const KEY = "favorites";
@@ -40,10 +42,19 @@ export default function Home() {
   const [taste, setTaste] = useState("");
   const [tasteFilter, setTasteFilter] = useState<Filter>({});
   const [tasteMsg, setTasteMsg] = useState("");
+  const [, setTick] = useState(0); // 언어를 바꾸면 화면을 다시 그린다
 
   useEffect(() => {
     setFavorites(readFavorites());
+    setLang(detectLang());
+    setTick((n) => n + 1);
   }, []);
+
+  function chooseLang(next: Lang) {
+    setLang(next);
+    document.documentElement.lang = next;
+    setTick((n) => n + 1);
+  }
 
   const picks = useMemo(() => {
     const pool = restaurants.filter((r) => !area.trim() || r.area.includes(area.trim()));
@@ -63,24 +74,31 @@ export default function Home() {
       const data = await res.json();
       if (!res.ok) {
         setTasteFilter({});
-        setTasteMsg(data.error ?? "취향을 읽지 못했어요.");
+        setTasteMsg(data.error ?? t("taste.fail"));
         return;
       }
       setTasteFilter(data.filter);
-      setTasteMsg("취향을 반영했어요.");
+      setTasteMsg(t("taste.done"));
     } catch {
-      setTasteMsg("취향을 읽지 못했어요. 메뉴 버튼으로 골라 주세요.");
+      setTasteMsg(t("taste.fail"));
     }
   }
 
   return (
     <main>
-      <h1>오늘 뭐 먹지</h1>
-      <p className="hint">동네와 메뉴를 고르면 오늘 갈 만한 곳 3곳을 골라 드려요.</p>
+      <div className="langs" role="group" aria-label={t("lang.label")}>
+        {(["ko", "en"] as const).map((l) => (
+          <button key={l} type="button" aria-pressed={lang === l} onClick={() => chooseLang(l)}>
+            {t(`lang.${l}`)}
+          </button>
+        ))}
+      </div>
+      <h1>{t("app.title")}</h1>
+      <p className="hint">{t("app.hint")}</p>
       <input
         type="text"
-        placeholder="동네 이름을 넣어 주세요"
-        aria-label="동네 이름"
+        placeholder={t("area.placeholder")}
+        aria-label={t("area.label")}
         value={area}
         onChange={(e) => setArea(e.target.value)}
       />
@@ -88,16 +106,16 @@ export default function Home() {
         <input
           type="text"
           maxLength={100}
-          placeholder="한 줄 취향 (예: 매운 거 말고, 혼밥)"
-          aria-label="한 줄 취향"
+          placeholder={t("taste.placeholder")}
+          aria-label={t("taste.label")}
           value={taste}
           onChange={(e) => setTaste(e.target.value)}
         />
         <button type="button" onClick={applyTaste} disabled={!taste.trim()}>
-          반영
+          {t("taste.apply")}
         </button>
       </div>
-      <p className="hint">개인정보는 적지 마세요. {tasteMsg}</p>
+      <p className="hint">{t("taste.privacy")} {tasteMsg}</p>
       <div className="menus">
         {CATEGORIES.map((c) => (
           <button
@@ -106,24 +124,30 @@ export default function Home() {
             aria-pressed={category === c}
             onClick={() => setCategory(category === c ? "" : c)}
           >
-            {c}
+            {t(`category.${c}`)}
           </button>
         ))}
       </div>
       <section className="cards" aria-live="polite">
         {picks.length === 0 && (
-          <p className="empty">조건에 맞는 가게가 없어요. 동네나 메뉴를 바꿔 보세요.</p>
+          <p className="empty">{t("result.none")}</p>
         )}
         {picks.map((r) => (
           <article className="card" key={r.id} data-id={r.id}>
             <h2>{r.name}</h2>
             <p>
-              {r.area} · {r.category} · {r.hours}
+              {r.area} · {t(`category.${r.category}`)} · {r.hours} · {fmtDistance(r.distanceM)}
+            </p>
+            <p>
+              {t("result.reason", {
+                weather: t(MOCK_WEATHER.rain ? "weather.rain" : "weather.clear"),
+                category: t(`category.${r.category}`),
+              })}
             </p>
             <button
               type="button"
               className="star"
-              aria-label="즐겨찾기"
+              aria-label={t("favorite.label")}
               aria-pressed={favorites.includes(r.id)}
               onClick={() => setFavorites(toggleFavorite(r.id))}
             >
@@ -132,7 +156,7 @@ export default function Home() {
           </article>
         ))}
       </section>
-      <p className="hint source">출처: 공공데이터포털 (기상청 단기예보, 한국관광공사 TourAPI). 화면의 가게 목록은 가상 데이터입니다.</p>
+      <p className="hint source">{t("footer.source")}. {t("footer.mock")}</p>
     </main>
   );
 }

@@ -80,3 +80,10 @@
 - LLM 호출은 src/llm.ts 한 곳에서만 한다. 모델 이름은 llm.config.json 에 두고 코드에 박지 않는다.
 - 사용자 입력 중 이름·연락처·정확한 위치는 무료 API에 보내지 않는다.
 - AI 호출이 실패해도 화면이 멈추지 않게 src/recommend-safe.ts 처럼 코드 기반 추천으로 내려간다. 월 상한 오류는 재시도하지 않는다.
+
+# 다국어 규칙
+
+- 화면에 보이는 문구는 코드에 직접 쓰지 않고 locales/ko.json, locales/en.json 의 키로 쓴다. 새 키는 두 파일에 같이 넣는다.
+- 번역할 때 locales/glossary.md 를 지키고, {weather} 같은 중괄호 자리 표시는 바꾸지 않는다.
+- 숫자·날짜·통화는 직접 쓰지 않고 src/format.ts (Intl)로 쓴다.
+- 스토어 문구는 번역 뒤에 scripts/check-store-length.ts 로 글자 수를 확인한다. 법적 문구와 서비스 이름은 사람이 확인한다.

@@ -1,0 +1,5 @@
+What to Eat Today helps you decide what to eat.
+
+Choose a neighborhood and a menu category, add a one-line taste such as "not spicy, solo dining", and the app suggests 3 places that fit the weather and the distance.
+
+The restaurant list in this sample is fictional. Save your favorites with one tap.
