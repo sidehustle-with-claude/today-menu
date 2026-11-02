@@ -8,10 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - name: index.html 확인
-        run: test -f index.html
-      - name: JSON 문법 확인
-        run: |
-          for f in $(find . -name '*.json' -not -path './node_modules/*'); do
-            python3 -m json.tool "$f" > /dev/null
-          done
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: 타입 확인
+        run: npm run typecheck
+      - name: 테스트
+        run: npm test
+      - name: 빌드
+        run: npm run build

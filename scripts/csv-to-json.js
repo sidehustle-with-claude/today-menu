@@ -1,12 +1,15 @@
 // data/restaurants.csv 를 읽어 public/data/restaurants.json 으로 바꾼다.
 // 실행: node scripts/csv-to-json.js [입력.csv] [출력.json]
-// 필요한 열만 남긴다: id, name, area, category, hours. 전화번호 같은 개인정보 열은 버린다.
+// 필요한 열만 남긴다: id, name, area, category, hours, distanceM, indoor, soupy, solo. 전화번호 같은 개인정보 열은 버린다.
+// distanceM 은 숫자로, indoor/soupy/solo 는 true/false 로 바꾼다 (추천 점수 계산용, 16장).
 const fs = require("fs");
 const path = require("path");
 
 const input = process.argv[2] || path.join(__dirname, "..", "data", "restaurants.csv");
 const output = process.argv[3] || path.join(__dirname, "..", "public", "data", "restaurants.json");
-const KEEP = ["id", "name", "area", "category", "hours"];
+const KEEP = ["id", "name", "area", "category", "hours", "distanceM", "indoor", "soupy", "solo"];
+const NUMBERS = ["distanceM"];
+const BOOLEANS = ["indoor", "soupy", "solo"];
 const PERSONAL = ["phone", "tel", "owner", "email", "전화번호", "대표자"];
 
 function parseLine(line) {
@@ -38,7 +41,10 @@ if (missing.length) {
 const rows = lines.slice(1).map((l) => {
   const cells = parseLine(l);
   const obj = {};
-  for (const k of KEEP) obj[k] = (cells[header.indexOf(k)] || "").trim();
+  for (const k of KEEP) {
+    const raw = (cells[header.indexOf(k)] || "").trim();
+    obj[k] = NUMBERS.includes(k) ? Number(raw) : BOOLEANS.includes(k) ? raw === "true" : raw;
+  }
   return obj;
 });
 

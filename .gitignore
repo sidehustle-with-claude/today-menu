@@ -11,3 +11,10 @@ node_modules
 
 references/*.png
 references/*.jpg
+
+# Next.js, 테스트, 캐시
+.next
+next-env.d.ts
+*.tsbuildinfo
+coverage
+.cache
