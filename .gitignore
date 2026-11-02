@@ -71,3 +71,6 @@ blog-example/.sass-cache/
 mobile/.env
 mobile/.env.*
 !mobile/.env.example
+
+# 40장: 텔레그램 토큰 (이미 위에 있어도 한 번 더 확인용)
+.env
