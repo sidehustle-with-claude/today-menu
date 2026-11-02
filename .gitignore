@@ -81,3 +81,9 @@ audio/*.mp3
 audio/parts/
 out/*/
 out/*.time
+
+# 47장: 영상 원본과 결과물
+video/*
+!video/.gitkeep
+output/*
+!output/.gitkeep

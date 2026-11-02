@@ -252,3 +252,11 @@
 ## 클로드 전용
 - 한국어로 답한다.
 - 훅과 스킬은 .claude 폴더에 둔다.
+
+## ffmpeg 작업 규칙 (47장)
+- 입력 파일은 수정하지 않는다.
+- 출력은 output/ 폴더에 새 이름으로 저장한다.
+- 덮어쓰기 방지로 -n 을 붙인다.
+- 실행 전에 명령을 먼저 보여 준다.
+- 끝나면 ffprobe 로 길이·해상도·코덱을 확인해서 알려 준다.
+- 스크립트는 scripts/ 의 cut.sh, extract-audio.sh, shrink.sh, burn-subtitles.sh, make-intro.sh, mix-bgm.sh 를 먼저 쓴다.
