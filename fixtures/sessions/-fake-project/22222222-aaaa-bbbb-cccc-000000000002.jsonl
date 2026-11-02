@@ -1,0 +1,5 @@
+{"type": "user", "timestamp": "2026-11-03T08:00:00.000Z", "message": {"role": "user", "content": [{"type": "text", "text": "한국어로 답해 줘"}, {"type": "image", "source": {}}]}}
+{"type": "user", "timestamp": "2026-11-03T08:01:00.000Z", "message": {"role": "user", "content": "아니 그건 빼고"}}
+{"type": "user", "timestamp": "2026-11-03T08:02:00.000Z", "message": {"role": "user", "content": "추천 후보에 비빔밥 넣어 줘\n줄바꿈과\t탭이 있는 문장"}}
+{"type": "user", "timestamp": "2026-11-04T08:00:00.000Z", "message": {"role": "user", "content": "다시 확인해 줘"}}
+{"type": "assistant", "timestamp": "2026-11-04T08:00:05.000Z", "message": {"role": "assistant", "content": [{"type": "text", "text": "확인했습니다."}]}}

@@ -98,3 +98,5 @@ posted.json
 launchd.out
 launchd.err
 posts/HOLD
+my-messages.tsv
+*.tsv.tmp
